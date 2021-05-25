@@ -80,10 +80,11 @@ In the console run the following command to start the Rails server and Hotloader
 ```text
 bundle exec foreman start
 ```
+> If you face an error, 'couldn't find file 'opal-jquery' with type 'application/javascript', then go to Gemfile, add `gem 'opal-jquery'`, and then do `bundle install` 
 
 For the rest of the tutorial you will want to keep foreman running in the background and have a second console window open in the `todo-demo` directory to execute various commands.
 
-Navigate to [http://localhost:5000/](http://localhost:5000/) in your browser and you should see the word **Hello world from Hyperstack!** displayed on the page. Hyperstack will need a moment to start and pre-compile with the first request.
+Navigate to [http://localhost:5000/](http://localhost:5000/) in your browser and you should see the word **App** displayed on the page. Hyperstack will need a moment to start and pre-compile with the first request.
 
 **Note:** _you will be using port 5000 not the more typical 3000, this is because of the way the Hotloader is configured._
 
@@ -94,30 +95,23 @@ Bring up your favorite editor on the `todo-demo` directory. You will see folders
 Now find the `app/hyperstack/components/app.rb` file. It looks like this:
 
 ```ruby
-# app/hyperstack/component/app.rb
-
-# This is your top level component, the rails router will
-# direct all requests to mount this component.  You may
-# then use the Route psuedo component to mount specific
-# subcomponents depending on the URL.
-
 class App < HyperComponent
   include Hyperstack::Router
-
-  # define routes using the Route psuedo component.  Examples:
-  # Route('/foo', mounts: Foo)                : match the path beginning with /foo and mount component Foo here
-  # Route('/foo') { Foo(...) }                : display the contents of the block
-  # Route('/', exact: true, mounts: Home)     : match the exact path / and mount the Home component
-  # Route('/user/:id/name', mounts: UserName) : path segments beginning with a colon will be captured in the match param
-  # see the hyper-router gem documentation for more details
-
   render do
-    H1 { "Hello world from Hyperstack!" }
+    DIV do
+      'App'
+      # define routes using the Route psuedo component.  Examples:
+      # Route('/foo', mounts: Foo)                : match the path beginning with /foo and mount component Foo here
+      # Route('/foo') { Foo(...) }                : display the contents of the block
+      # Route('/', exact: true, mounts: Home)     : match the exact path / and mount the Home component
+      # Route('/user/:id/name', mounts: UserName) : path segments beginning with a colon will be captured in the match param
+      # see the hyper-router gem documentation for more details
+    end
   end
 end
 ```
 
-Change the string displayed to something like: `"Todo App Coming Soon"`. You will see the display instantly change when you save the file.
+Change the string displayed ('App') to something like: `"Todo App Coming Soon"`. You will see the display instantly change when you save the file.
 
 You can also delete the comments as we will go over details of routing later.
 
